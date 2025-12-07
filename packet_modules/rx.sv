@@ -6,7 +6,8 @@ module rx_engine(
     input logic packet_done,
 
     output logic last_data_byte,
-    output logic[7:0] rx_fifo_data, // work in progress
+    output logic[7:0] rx_fifo_data,
+    output logic crc_error
 );
 
     function automatic logic [15:0] update_crc16(input logic [15:0] crc_in, input logic [7:0] data_in);
@@ -56,18 +57,43 @@ module rx_engine(
         return next_crc;
     endfunction
 
-    logic [15:0] crc16_reg;
-    crc16_reg = 0xFFFF;
+    logic [7:0] pipeline_0, pipeline_1; // previous 2 bytes, used to stop sending to rx_fifo once CRC16 are detected
+    logic [1:0] byte_count;
+    logic [15:0] crc_reg;
     fifo = {};
 
     always_ff @(posedge clk, negedge nRST) begin
         if(!nRST) begin
-            crc16_reg <= 0xFFFF;
+            crc16 <= 0xFFFF;
             packet_done <= 0;
             last_data_byte <= 0;
         end
         else begin
-            // token 1, 2
-            // 2 bit delay pipeline 
+            rx_fifo_data <= 0;
+
+            if (packet_done) begin // if at EOP
+                // at EOP, previous 2 bytes should always be CRC16
+                if (crc_reg != 16'h800D) begin
+                    crc_error <= 1;
+                end
+
+                crc_reg <= 16'hFFFF;
+                byte_count <= 0;
+            end
+            else if (load_data) begin
+                crc_reg <= update_crc16(crc_reg, data_in); // calculates if data_in is a CRC16 data packet
+
+                pipeline_0 <= data_in;
+                pipeline_1 <= pipeline_0;
+
+                // only write to fifo if we have filled the pipeline
+                if (byte_count == 2) begin
+                    rx_fifo_data <= pipeline_1;
+                    rx_fifo_wen <= 1;
+                end
+                else begin
+                    byte_count <= byte_count + 1;
+                end
+            end
         end
     end

@@ -4,7 +4,7 @@ module fsm(
     input logic is_sync,
     input logic[3:0] pid,
     input logic pid_valid,
-    input logic last_data_byte,
+    input logic rx_eop,
 
     output logic prev_sync,
     output logic load_addr,
@@ -39,7 +39,6 @@ module fsm(
         TOKEN_ENDP, // token endpoint
         TOKEN_CRC5, // token crc5
         DATA, // data (as many 8-bit signals as needed)
-        DATA_CRC16, // data crc16 part 0, indicating end of data
         EOP // end of packet
     } state_t;
     state_t current_state, next_state;
@@ -130,16 +129,13 @@ module fsm(
 
             DATA: begin
                 load_data = 1;
-                if (last_data_byte) begin
-                    next_state = DATA_CRC16;
+                if (rx_eop) begin
+                    packet_done = 1;
+                    next_state = IDLE;
                 end
                 else begin
                     next_state = DATA;
                 end
-            end
-
-            DATA_CRC16: begin
-                next_state = EOP;
             end
 
             EOP: begin

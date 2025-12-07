@@ -1,19 +1,19 @@
-module nrzi(
+module nrzi_decoder(
     input logic clk, nRST,
     input logic start_encoding, // enable to start encoding
     input logic curr_bit,
-    output logic encoded_bit
+    output logic decoded_bit
 );
 
-logic prev_encoded_bit;
+logic prev_decoded_bit;
 
 always_comb begin
     if (start_encoding == 0) begin
-        // encoded bit defaults to 0 when no bits are being sent
-        encoded_bit = 0;
+        // decoded bit should be?
+        decoded_bit = 0;
     end else begin
-        // toggle encoded line if curr_bit = 0, else keep it the same
-        encoded_bit = (curr_bit == 0) ? ~prev_encoded_bit : prev_encoded_bit;
+        // 
+        decoded_bit = 
     end
 end
 
@@ -24,7 +24,7 @@ always_ff @(posedge clk or posedge rst) begin
         prev_encoded_bit <= 0;
     end else begin
         // assign encoded bit to the 1 bit register prev_encoded_bit to be used in next call
-        prev_encoded_bit <= encoded_bit;
+        prev_decoded_bit <= decoded_bit;
     end
 end
 
