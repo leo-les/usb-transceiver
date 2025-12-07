@@ -18,10 +18,11 @@ always_comb begin
 end
 
 // trigger block when a rising edge of clk or rst is detected
-always_ff @(posedge clk or posedge rst) begin
+    always_ff @(posedge clk or negedge nRST) begin
     if (!nRST) begin
         // if reset, set previous encoded bit to 0
         prev_encoded_bit <= 0;
+        encoded_bit <= 1; // Idle state 
     end else begin
         // assign encoded bit to the 1 bit register prev_encoded_bit to be used in next call
         prev_encoded_bit <= encoded_bit;
