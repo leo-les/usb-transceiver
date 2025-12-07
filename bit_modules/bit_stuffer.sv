@@ -22,6 +22,7 @@ module usb_bit_stuffer (
             state     <= NORMAL;
             out_bit   <= 0;
             out_valid <= 0;
+            next_one_count <= '0;
         end else begin
             one_count <= next_one_count;
             state <= next_state;
@@ -69,5 +70,6 @@ module usb_bit_stuffer (
     
 
 endmodule
+
 
 
