@@ -16,7 +16,7 @@ module usb_bit_stuffer (
     state_t state, next_state;
 
     logic [2:0] one_count, next_one_count;
-
+    // Clocked logic
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             state <= RESET;
@@ -27,7 +27,7 @@ module usb_bit_stuffer (
 
         end
     end
-      
+    //Next state logic
     always_comb begin
         next_state = state;
         case(state)
@@ -45,7 +45,7 @@ module usb_bit_stuffer (
             end
         endcase
     end
-    
+    // State-based output logic
     always_comb begin
         out_bit = 0;
         out_valid = 0;
@@ -79,6 +79,7 @@ module usb_bit_stuffer (
     
 
 endmodule
+
 
 
 
