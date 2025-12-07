@@ -12,7 +12,7 @@ module usb_bit_stuffer (
 );
 
     typedef enum logic {NORMAL, STUFFING} state_t;
-    state_t state;
+    state_t state, next_state;
 
     logic [2:0] one_count;
 
@@ -24,23 +24,34 @@ module usb_bit_stuffer (
             out_valid <= 0;
         end else begin
             if(in_bit == 1)
-                one_count = one_count + 1;
+                one_count <= one_count + 1;
             state <= next_state;
 
         end
     end
       
+    always_comb begin
+        case(state)
+            NORMAL: begin
+                if(one_count == 5 && in_bit == 1) 
+                    next_state = STUFFING;
+                else
+                    next_state = NORMAL;
+            end
+            STUFFING: begin
+                next_state = NORMAL;
+            end
+        endcase
+    end
     
     always_comb begin
         out_bit = 0;
+        out_valid = 0;
+        
         case (state)
 
         NORMAL: begin
             if (en) begin
-                if(one_count == 5 && in_bit == 1) 
-                    next_state = STUFFING;
-                else
-                    next_state = NORMAL
                 out_valid = 1;
                 out_bit = in_bit;
             end
@@ -50,7 +61,6 @@ module usb_bit_stuffer (
             out_valid = 0;
             out_bit   = 0;
             one_count = 0;
-            next_state = NORMAL;
         end
 
         endcase
@@ -58,3 +68,4 @@ module usb_bit_stuffer (
     
 
 endmodule
+
