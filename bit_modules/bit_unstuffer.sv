@@ -7,11 +7,12 @@ module usb_bit_unstuffer (
     input  logic in_valid,
 
     output logic out_bit,   // output unstuffed stream
-    output logic out_valid
+    output logic out_valid,
+    output logic[2:0] one_count
 );
 
     // counter for consecutive 1's
-    logic [2:0] one_count;  
+    //logic [2:0] one_count;  
     logic       drop_next;  
 
     always_ff @(posedge clk or negedge nRST) begin
