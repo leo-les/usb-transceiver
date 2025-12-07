@@ -1,4 +1,4 @@
-module fsm(
+module rx_fsm(
     input logic clk, nRST,
     input logic byte_valid,
     input logic is_sync,
