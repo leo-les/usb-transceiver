@@ -25,7 +25,6 @@ end
     if (!nRST) begin
         // if reset, set previous encoded bit to 0
         prev_encoded_bit <= 0;
-        decoded_bit <= 1; // Idle state
     end else begin
         // assign encoded bit to the 1 bit register prev_encoded_bit to be used in next call
         prev_encoded_bit <= curr_bit;
