@@ -1,0 +1,41 @@
+`default_nettype none
+
+module tb_nrzi_decoder_tb();
+
+reg clk=0;
+logic nRST=1;
+reg start_decoding=1;
+reg curr_bit=0;
+wire  reg decoded_bit;
+
+nrzi_decoder uut (
+    .clk               (    clk               ),
+    .nRST              (    nRST              ),
+    .start_decoding    (    start_decoding    ),
+    .curr_bit          (    curr_bit          ),
+    .decoded_bit       (    decoded_bit       )
+);
+logic [14:0] data =15'b000110010110111;
+initial begin    
+nRST = 1;
+#10;
+nRST = 0;
+#10;
+nRST = 1;
+   
+    for(int i = 14; i >=0; i--) begin
+        clk = 0;
+        curr_bit = data[i];
+        #10;
+        clk = 1;
+        #10;
+    end
+end    
+
+initial begin
+    $dumpfile("db_tb_nrzi_decoder.vcd");
+    $dumpvars(1, tb_nrzi_decoder_tb);
+    
+end
+
+endmodule
