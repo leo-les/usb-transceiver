@@ -10,7 +10,7 @@ module piso_shift_register(
 
     logic[7:0] data;
     logic[2:0] bit_cnt;
-
+    logic tmp;
     always_ff @(posedge clk, negedge nRST) begin
         if(!nRST) begin
             // set all to 0 if reset
@@ -28,6 +28,7 @@ module piso_shift_register(
                 busy <= 1'b1;
             end 
             else if (busy && shift_enable) begin
+                tmp <= data[7];
                 for (int i = 7; i > 0; i = i -1 ) begin
                     data[i] <= data[i-1];
                 end
@@ -41,5 +42,5 @@ module piso_shift_register(
         end
     end
 
-    assign serial_out = data[0];
+    assign serial_out = tmp;
     endmodule

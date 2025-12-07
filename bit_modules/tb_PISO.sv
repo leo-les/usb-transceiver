@@ -11,13 +11,15 @@ module tb_piso_shift_register;
     piso_shift_register DUT(
         .clk(clk),
         .nRST(nRST),
-        .shift_enable(shift_enable)
+        .shift_enable(shift_enable),
         .data_in(data_in),
         .load(load),
         .serial_out(serial_out),
         .busy(busy),
         .done(done)
     );
+    
+    always #5 clk = ~clk;
 
     task shift_one_bit;
         begin
@@ -28,6 +30,8 @@ module tb_piso_shift_register;
     endtask
 
     initial begin
+        $dumpfile("wave.vcd");
+        $dumpvars;
         clk = 0;
         nRST = 0;
         shift_enable = 0;
@@ -52,6 +56,6 @@ module tb_piso_shift_register;
         shift_enable = 0;
         @(posedge clk);
         $display("Shift complete. done=%b, busy=%b", done, busy);
-        $finish
+        $finish;
     end
-    endmodules
+endmodule
