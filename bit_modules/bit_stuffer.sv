@@ -71,7 +71,6 @@ module usb_bit_stuffer (
         
         RESET: begin
             out_valid = 0;
-            out_bit = 0;
             next_one_count = 0;
         end
 
@@ -80,6 +79,7 @@ module usb_bit_stuffer (
     
 
 endmodule
+
 
 
 
