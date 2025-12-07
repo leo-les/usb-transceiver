@@ -14,7 +14,7 @@ module usb_bit_stuffer (
     typedef enum logic {NORMAL, STUFFING} state_t;
     state_t state, next_state;
 
-    logic [2:0] one_count;
+    logic [2:0] one_count, next_one_count;
 
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
@@ -23,8 +23,7 @@ module usb_bit_stuffer (
             out_bit   <= 0;
             out_valid <= 0;
         end else begin
-            if(in_bit == 1)
-                one_count <= one_count + 1;
+            one_count <= next_one_count;
             state <= next_state;
 
         end
@@ -33,7 +32,7 @@ module usb_bit_stuffer (
     always_comb begin
         case(state)
             NORMAL: begin
-                if(one_count == 5 && in_bit == 1) 
+                if(next_one_count == 6) 
                     next_state = STUFFING;
                 else
                     next_state = NORMAL;
@@ -54,13 +53,15 @@ module usb_bit_stuffer (
             if (en) begin
                 out_valid = 1;
                 out_bit = in_bit;
+                if(in_bit == 1)
+                    next_one_count = one_count + 1;
             end
         end
 
         STUFFING: begin
             out_valid = 0;
             out_bit   = 0;
-            one_count = 0;
+            next_one_count = 0;
         end
 
         endcase
@@ -68,4 +69,5 @@ module usb_bit_stuffer (
     
 
 endmodule
+
 
