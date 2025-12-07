@@ -47,7 +47,7 @@ module usb_bit_stuffer (
     always_comb begin
         out_bit = 0;
         out_valid = 0;
-        
+        next_one_count = one_count;
         case (state)
 
         NORMAL: begin
@@ -56,6 +56,8 @@ module usb_bit_stuffer (
                 out_bit = in_bit;
                 if(in_bit == 1)
                     next_one_count = one_count + 1;
+                else if(in_bit == 0)
+                    next_one_count = 0;
             end
         end
 
@@ -70,6 +72,7 @@ module usb_bit_stuffer (
     
 
 endmodule
+
 
 
 
