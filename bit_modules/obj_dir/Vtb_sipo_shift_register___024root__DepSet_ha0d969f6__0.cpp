@@ -30,7 +30,7 @@ VL_INLINE_OPT VlCoroutine Vtb_sipo_shift_register___024root___eval_initial__TOP_
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         31);
+                                                         29);
     vlSelfRef.tb_sipo_shift_register__DOT__nRST = 1U;
     VL_WRITEF_NX("Shifting data bits: 10110110\n",0);
     vlSelfRef.tb_sipo_shift_register__DOT__shift_enable = 1U;
@@ -39,86 +39,78 @@ VL_INLINE_OPT VlCoroutine Vtb_sipo_shift_register___024root___eval_initial__TOP_
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 6U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 0U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=0, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=0, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 5U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 1U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 4U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 1U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 3U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 0U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=0, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=0, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 2U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 1U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 1U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 1U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=1, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 0U;
     vlSelfRef.tb_sipo_shift_register__DOT__serial_in = 0U;
     co_await vlSelfRef.__VtrigSched_h58e14599__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_sipo_shift_register.CLK)", 
                                                          "tb_SIPO.sv", 
-                                                         39);
-    VL_WRITEF_NX("Time=%0t, shifted bit=0, data_out=%b, byte_valid=%b\n",0,
-                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),
-                 1,vlSelfRef.tb_sipo_shift_register__DOT__byte_valid);
+                                                         37);
+    VL_WRITEF_NX("Time=%0t, shifted bit=0, data_out=%b\n",0,
+                 64,VL_TIME_UNITED_Q(1),-12,8,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data));
     vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 0xffffffffU;
     vlSelfRef.tb_sipo_shift_register__DOT__shift_enable = 0U;
     VL_WRITEF_NX("Final data_out = %b (expected 10110110), done = %b\n",0,
                  8,vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data,
                  1,(IData)(vlSelfRef.tb_sipo_shift_register__DOT__done));
-    VL_FINISH_MT("tb_SIPO.sv", 46, "");
+    VL_FINISH_MT("tb_SIPO.sv", 44, "");
 }
 
 VL_INLINE_OPT VlCoroutine Vtb_sipo_shift_register___024root___eval_initial__TOP__Vtiming__1(Vtb_sipo_shift_register___024root* vlSelf) {
@@ -130,7 +122,7 @@ VL_INLINE_OPT VlCoroutine Vtb_sipo_shift_register___024root___eval_initial__TOP_
         co_await vlSelfRef.__VdlySched.delay(5ULL, 
                                              nullptr, 
                                              "tb_SIPO.sv", 
-                                             23);
+                                             21);
         vlSelfRef.tb_sipo_shift_register__DOT__CLK 
             = (1U & (~ (IData)(vlSelfRef.tb_sipo_shift_register__DOT__CLK)));
     }
@@ -166,27 +158,24 @@ VL_INLINE_OPT void Vtb_sipo_shift_register___024root___nba_sequent__TOP__0(Vtb_s
     __Vdly__tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt 
         = vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt;
     if (vlSelfRef.tb_sipo_shift_register__DOT__nRST) {
-        vlSelfRef.tb_sipo_shift_register__DOT__byte_valid = 0U;
+        vlSelfRef.tb_sipo_shift_register__DOT__done = 0U;
         if (vlSelfRef.tb_sipo_shift_register__DOT__shift_enable) {
             vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__unnamedblk2__DOT__i = 0U;
             vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__tmp 
                 = vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data;
             vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data 
-                = ((0xfeU & ((IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__tmp) 
+                = ((0xfeU & ((IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data) 
                              << 1U)) | (IData)(vlSelfRef.tb_sipo_shift_register__DOT__serial_in));
+            if ((7U == (IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt))) {
+                vlSelfRef.tb_sipo_shift_register__DOT__done = 1U;
+                __Vdly__tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt = 0U;
+            }
             __Vdly__tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt 
                 = (7U & ((IData)(1U) + (IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt)));
-            if ((7U == (IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt))) {
-                vlSelfRef.tb_sipo_shift_register__DOT__byte_valid = 1U;
-                vlSelfRef.tb_sipo_shift_register__DOT__done = 1U;
-            } else {
-                vlSelfRef.tb_sipo_shift_register__DOT__byte_valid = 0U;
-            }
         }
     } else {
         vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data = 0U;
         __Vdly__tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt = 0U;
-        vlSelfRef.tb_sipo_shift_register__DOT__byte_valid = 0U;
         vlSelfRef.tb_sipo_shift_register__DOT__done = 0U;
     }
     vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt 

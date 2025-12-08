@@ -18,6 +18,7 @@ module piso_shift_register(
             bit_cnt <= '0;
             busy <= 1'b0;
             done <= 1'b0;
+            tmp <= 1'b0;
         end 
         else begin
             done <= 1'b0;
@@ -33,10 +34,12 @@ module piso_shift_register(
                     data[i] <= data[i-1];
                 end
                 data[0] <= 1'b0;
-                bit_cnt <= bit_cnt + 1;
                 if(bit_cnt == 3'd7) begin
                     busy <= 1'b0; // check this
                     done <= 1'b1;
+                    bit_cnt <= 3'd0;
+                end else begin
+                    bit_cnt <= bit_cnt + 1'd1;
                 end
             end
         end

@@ -5,7 +5,6 @@ module tb_sipo_shift_register;
     logic shift_enable;
     logic serial_in;
     logic [7:0] data_out;
-    logic byte_valid;
     logic done;
 
     logic [7:0] test_data = 8'b10110110;
@@ -16,7 +15,6 @@ module tb_sipo_shift_register;
         .shift_enable(shift_enable),
         .serial_in(serial_in),
         .data_out(data_out),
-        .byte_valid(byte_valid),
         .done(done)
     );
 
@@ -37,8 +35,8 @@ module tb_sipo_shift_register;
         for (int i = 7; i >= 0; i = i - 1) begin
             serial_in = test_data[i];
             @(posedge CLK);
-            $display("Time=%0t, shifted bit=%0b, data_out=%b, byte_valid=%b",
-                      $time, test_data[i], data_out, byte_valid);
+            $display("Time=%0t, shifted bit=%0b, data_out=%b",
+                      $time, test_data[i], data_out);
         end
         shift_enable = 0;
 

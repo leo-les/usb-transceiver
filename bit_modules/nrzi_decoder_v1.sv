@@ -1,4 +1,3 @@
-`default_nettype none
 module nrzi_decoder(
     input logic clk, nRST,
     input logic pulse, // pulse from DPLL

@@ -79,7 +79,6 @@ VL_ATTR_COLD void Vtb_sipo_shift_register___024root___ctor_var_reset(Vtb_sipo_sh
     vlSelf->tb_sipo_shift_register__DOT__nRST = VL_RAND_RESET_I(1);
     vlSelf->tb_sipo_shift_register__DOT__shift_enable = VL_RAND_RESET_I(1);
     vlSelf->tb_sipo_shift_register__DOT__serial_in = VL_RAND_RESET_I(1);
-    vlSelf->tb_sipo_shift_register__DOT__byte_valid = VL_RAND_RESET_I(1);
     vlSelf->tb_sipo_shift_register__DOT__done = VL_RAND_RESET_I(1);
     vlSelf->tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 0;
     vlSelf->tb_sipo_shift_register__DOT__DUT__DOT__data = VL_RAND_RESET_I(8);

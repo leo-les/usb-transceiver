@@ -19,7 +19,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_sipo_shift_register___024root final : pub
     CData/*0:0*/ tb_sipo_shift_register__DOT__nRST;
     CData/*0:0*/ tb_sipo_shift_register__DOT__shift_enable;
     CData/*0:0*/ tb_sipo_shift_register__DOT__serial_in;
-    CData/*0:0*/ tb_sipo_shift_register__DOT__byte_valid;
     CData/*0:0*/ tb_sipo_shift_register__DOT__done;
     CData/*7:0*/ tb_sipo_shift_register__DOT__DUT__DOT__data;
     CData/*2:0*/ tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt;
