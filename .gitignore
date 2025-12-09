@@ -1,0 +1,5 @@
+docs/*
+!docs/*.tex
+!docs/*.pdf
+!docs/*.pptx
+!docs/images/
