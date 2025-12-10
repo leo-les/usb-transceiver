@@ -44,7 +44,7 @@ module usb_transceiver(
         .decoded_bit(nrzi_decoded_bit), .done(decoder_done)
     );
 
-    bit_unstuffer u_bit_unstuffer(
+    usb_bit_unstuffer u_usb_bit_unstuffer(
         .clk(clk), .nRST(nRST), .in_bit(nrzi_decoded_bit), .in_valid(enable_unstuffer),
         .out_bit(unstuffed_bit), .out_valid(unstuffer_done)
     );
@@ -75,7 +75,7 @@ module usb_transceiver(
         .serial_out(raw_tx_bit), .done(piso_done)
     );
 
-    bit_stuffer u_bit_stuffer(
+    usb_bit_stuffer u_usb_bit_stuffer(
         .clk(clk), .nRST(nRST), .in_bit(raw_tx_bit), .en(enable_stuffer),
         .out_bit(stuffed_bit), .out_valid(stuffer_done)
     );
