@@ -1,5 +1,5 @@
 `default_nettype none
-module usb_bit_unstuffer_tb();
+module tb_usb_bit_unstuffer_tb();
 reg clk=0;
 reg nRST=0;
 reg in_bit=0;
