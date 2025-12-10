@@ -2,7 +2,6 @@ module eop_detector(
     input logic clk,
     input logic d_plus,
     input logic d_minus,
-    input logic pulse,
     output logic rx_eop
 )
 

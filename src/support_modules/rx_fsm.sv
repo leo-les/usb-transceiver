@@ -2,13 +2,13 @@ module rx_fsm (
     input  logic clk, nRST
 
     // FSM Condition Inputs
-    input  logic SYNC_Detected,
-    input  logic SYNC,
-    input  logic Data,
-    input  logic EOP_Detected,
-    input  logic RXActive,
-    input  logic RXValid,
-    input  logic RXError,
+    input logic SYNC_Detected,
+    input logic SYNC,
+    input logic Data,
+    input logic EOP_Detected,
+    input logic RXActive,
+    input logic RXValid,
+    input logic RXError,
     
     // FSM Control Outputs
     output logic data_out_valid,
