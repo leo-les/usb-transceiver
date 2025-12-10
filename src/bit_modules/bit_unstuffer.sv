@@ -1,5 +1,5 @@
 `default_nettype none
-module usb_bit_unstuffer (
+module bit_unstuffer (
     input  logic clk,
     input  logic nRST,
 

@@ -2,8 +2,8 @@ module dpll( // digital phase locked loop
     input logic clk, // 4x oversampling 48 mHz clock
     input logic d_plus, // async input
     input logic d_minus, // async input
-    output logic bit, // bit value
-    output logic pulse // pulse indicating bit is valid
+    output logic aligned_bit, // aligned bit value
+    output logic pulse // pulse indicating aligned bit is valid
 )
 
     logic [1:0] counter;
@@ -23,8 +23,8 @@ module dpll( // digital phase locked loop
         end
 
         if (counter == 2) begin
-            bit <= d_plus
-            pulse <= 1; // on this pulse, bit can be sampled
+            aligned bit <= d_plus
+            pulse <= 1; // on this pulse, aligned bit can be sampled
         end
         else begin
             pulse <= 0;

@@ -1,6 +1,6 @@
 module nrzi_encoder(
     input logic clk, nRST,
-    input logic start_encoding, // enable to start encoding
+    input logic en, // enable to start encoding
     input logic curr_bit,
     output logic encoded_bit
 );
@@ -8,7 +8,7 @@ module nrzi_encoder(
 logic prev_encoded_bit;
 
 always_comb begin
-    if (start_encoding == 0) begin
+    if (en == 0) begin
         // encoded bit defaults to 0 when no bits are being sent
         encoded_bit = 0;
     end else begin
