@@ -65,14 +65,16 @@ module usb_transceiver(
 
     // TX FSM signals (module <-> tx_fsm)
     logic enable_piso;
+    logic piso_loading;
+    logic piso_busy;
     logic piso_done;
     logic enable_stuffer;
     logic stuffer_done;
     logic enable_encoder;
 
     piso_shift_register u_piso(
-        .clk(clk), .nRST(nRST), .shift_enable(enable_piso), .data_in(tx_data), .done(rx_valid)
-        .serial_out(raw_tx_bit), .done(piso_done)
+        .clk(clk), .nRST(nRST), .shift_enable(enable_piso), .data_in(tx_data), .load(piso_loading)
+        .serial_out(raw_tx_bit), .busy(piso_busy), .done(piso_done)
     );
 
     bit_stuffer u_bit_stuffer(
