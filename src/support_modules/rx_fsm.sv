@@ -35,8 +35,8 @@ typedef enum logic [3:0] {
 rx_state_t current_state, next_state;
 
 // Sequential Logic
-always_ff @(posedge clk or posedge Reset) begin
-    if (Reset) begin
+    always_ff @(posedge clk or negedge nRST) begin
+        if (!nRST) begin
         current_state <= S_RESET; 
     end else begin
         current_state <= next_state;
