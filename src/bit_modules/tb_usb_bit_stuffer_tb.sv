@@ -1,5 +1,4 @@
-`default_nettype none
-module tb_usb_bit_stuffer_tb();
+module tb_bit_stuffer_tb();
 reg clk=0;
 reg nRST=1;
 reg in_bit=0;
@@ -36,7 +35,7 @@ end
     
 end    
 initial begin
-    $dumpfile("db_tb_usb_bit_stuffer.vcd");
-    $dumpvars(1, tb_usb_bit_stuffer_tb);
+    $dumpfile("db_tb_bit_stuffer.vcd");
+    $dumpvars(1, tb_bit_stuffer_tb);
 end
 endmodule
