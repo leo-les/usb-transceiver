@@ -27,14 +27,13 @@ void Vtb_sipo_shift_register___024root__trace_chg_0_sub_0(Vtb_sipo_shift_registe
         bufp->chgCData(oldp+0,(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data),8);
         bufp->chgBit(oldp+1,(vlSelfRef.tb_sipo_shift_register__DOT__done));
         bufp->chgCData(oldp+2,(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt),3);
-        bufp->chgCData(oldp+3,(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__tmp),8);
-        bufp->chgIData(oldp+4,(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__unnamedblk2__DOT__i),32);
+        bufp->chgIData(oldp+3,(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__i),32);
     }
-    bufp->chgBit(oldp+5,(vlSelfRef.tb_sipo_shift_register__DOT__CLK));
-    bufp->chgBit(oldp+6,(vlSelfRef.tb_sipo_shift_register__DOT__nRST));
-    bufp->chgBit(oldp+7,(vlSelfRef.tb_sipo_shift_register__DOT__shift_enable));
-    bufp->chgBit(oldp+8,(vlSelfRef.tb_sipo_shift_register__DOT__serial_in));
-    bufp->chgIData(oldp+9,(vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i),32);
+    bufp->chgBit(oldp+4,(vlSelfRef.tb_sipo_shift_register__DOT__CLK));
+    bufp->chgBit(oldp+5,(vlSelfRef.tb_sipo_shift_register__DOT__nRST));
+    bufp->chgBit(oldp+6,(vlSelfRef.tb_sipo_shift_register__DOT__shift_enable));
+    bufp->chgBit(oldp+7,(vlSelfRef.tb_sipo_shift_register__DOT__serial_in));
+    bufp->chgIData(oldp+8,(vlSelfRef.tb_sipo_shift_register__DOT__unnamedblk1__DOT__i),32);
 }
 
 void Vtb_sipo_shift_register___024root__trace_cleanup(void* voidSelf, VerilatedFst* /*unused*/) {

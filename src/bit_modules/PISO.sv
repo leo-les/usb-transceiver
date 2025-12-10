@@ -8,6 +8,11 @@ module piso_shift_register(
     output logic done
 );
 
+    // load: let the register take in the parallel data at the same time -> prevent corruption, having more bits or less bits that needed
+    // busy: notify that the register is in the shifting process -> prevent taking the data when the shifting process is still going on
+    // shift_enable: tell the register when the bit should be shifted shifted
+    // done: done tells when the shifting process already ends
+
     logic[7:0] data;
     logic[2:0] bit_cnt;
     logic tmp;

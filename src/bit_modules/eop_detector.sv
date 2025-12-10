@@ -28,5 +28,4 @@ module eop_detector(
 
         se0_counter <= 0;
     end
-
 endmodule

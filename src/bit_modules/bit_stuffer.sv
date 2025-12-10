@@ -2,7 +2,7 @@ module bit_stuffer (
     input  logic clk,
     input  logic nRST,
     input  logic in_bit,
-    input  logic en,
+    input  logic stuff_en,
     output logic out_bit,
     output logic out_valid  
 );
@@ -44,7 +44,7 @@ module bit_stuffer (
         next_one_count = one_count;
         case (state)
         NORMAL: begin
-            if (en) begin
+            if (stuff_en) begin
                 out_valid = 1;
                 out_bit = in_bit;
                 if(in_bit == 1)

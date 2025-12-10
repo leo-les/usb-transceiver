@@ -29,6 +29,7 @@ module usb_transceiver(
     logic unstuffer_done; // unstuffer -> sipo
     logic sipo_done; // sipo -> usb output
 
+    // rx_active logic
     always_ff @(posedge clk, negedge nRST) begin
         if (!nRST) begin 
             rx_active <= 0;
@@ -94,33 +95,56 @@ module usb_transceiver(
     logic nrzi_encoded_bit;
 
     // TX FSM signals (module <-> tx_fsm)
-    logic enable_piso;
+    logic tx_done;
+    logic piso_en;
     logic piso_loading;
     logic piso_busy;
     logic piso_done;
-    logic enable_stuffer;
     logic stuffer_done;
-    logic enable_encoder;
+
+    tx_fsm u_tx_fsm(
+        .clk(clk), .nRST(nRST), 
+        .tx_start(tx_valid),
+        .tx_data_in(tx_data), // byte to send
+        .piso_busy(piso_busy),
+        .piso_done(piso_done),
+        .stuffer_done(stuffer_done),
+
+        .tx_done(tx_done),
+        .piso_loading(piso_loading), // load byte into piso
+        .piso_data(piso_data),
+    );
 
     piso_shift_register u_piso(
-        .clk(clk), .nRST(nRST), .shift_enable(enable_piso), .data_in(tx_data), .load(piso_loading)
+        .clk(clk), .nRST(nRST), .shift_enable(stuffer_valid), .data_in(piso_data), .load(piso_loading)
         .serial_out(raw_tx_bit), .busy(piso_busy), .done(piso_done)
     );
 
     bit_stuffer u_bit_stuffer(
-        .clk(clk), .nRST(nRST), .in_bit(raw_tx_bit), .en(enable_stuffer),
-        .out_bit(stuffed_bit), .out_valid(stuffer_done)
+        .clk(clk), .nRST(nRST), .in_bit(raw_tx_bit), .en(piso_done),
+        .out_bit(stuffed_bit), .out_valid(stuffer_valid)
     );
 
     nrzi_encoder u_nrzi_encoder(
-        .clk(clk), .nRST(nRST), .en(enable_encoder), .curr_bit(stuffed_bit),
+        .clk(clk), .nRST(nRST), .en(stuffer_valid), .curr_bit(stuffed_bit),
         .encoded_bit(nrzi_encoded_bit)
     );
 
-    tx_fsm u_tx_fsm(
-        // TODO: link tx fsm signals
-    );
+    // tx_1_rx_0 logic with nRST, tx_valid, tx_done, rx_active
+    always_ff @(posedge clk or negedge nRST) begin
+        if (!nRST) begin
+            tx_1_rx_0 <= 1'b0; // default: RX
+        end
+        else begin
+            if (tx_valid) tx_1_rx_0 <= 1'b1;
+            // go to receiving mode if either when TX FSM signals done or if host begins driving
+            else if (tx_done || rx_active) tx_1_rx_0 <= 1'b0;
+        end
+    end
 
+    // D+/D- is always 0 when receiving
+    // D+ is 1 when nrzi_encoded_bit is 1
+    // D- is 1 when nrzi_encoded_bit is 0
     assign d_plus_out  = tx_1_rx_0 ? nrzi_encoded_bit : 1'b0;
     assign d_minus_out = tx_1_rx_0 ? ~nrzi_encoded_bit : 1'b0;
 

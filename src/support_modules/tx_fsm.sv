@@ -1,22 +1,22 @@
 module tx_fsm (
-    // System Ports
-    input  logic clk, nRST
+    input  logic clk, nRST,
+    output logic tx_done,
 
-    // FSM Inputs
-    input  logicTXValid,
-    input  logic TXReady,
-    input  logic TX_Hold_Reg_Empty,
-    input  logic TX_Hold_Reg_Full,
-    input  logic EOP_not_done,
-    
-    // FSM Outputs
-    output logic send_sync_en,
-    output logic data_load_en,
-    output logic  send_eop_en
+    // Tx control
+    input  logic tx_start,
+    input  logic [7:0] tx_data_in,
+
+    // PISO interface
+    input  logic piso_busy,
+    input  logic piso_done,
+    output logic piso_loading,
+    output logic [7:0] piso_data,
+
+    // Bit stuffer
+    input  logic stuffer_done,
 );
 
-// State definitions
-typedef enum logic [2:0] { 
+typedef enum logic [2:0] {
     TX_S_RESET,
     TX_S_WAIT,
     TX_S_SEND_SYNC,
@@ -25,83 +25,62 @@ typedef enum logic [2:0] {
     TX_S_SEND_EOP
 } tx_state_t;
 
-tx_state_t tx_current_state, tx_next_state;
+tx_state_t state, next_state;
 
-// Sequential Logic
-always_ff @(posedge clk or posedge Reset) begin
-    if (Reset) begin
-        tx_current_state <= TX_S_RESET; 
-    end else begin
-        tx_current_state <= tx_next_state;
-    end
+localparam [7:0] SYNC_BYTE = 8'b00000001;   // USB SYNC LSB first
+
+always_ff @(posedge clk or negedge nRST) begin
+    if (!nRST)
+        state <= TX_S_RESET;
+    else
+        state <= next_state;
 end
 
-// Combinational Logic
 always_comb begin
-    tx_next_state = tx_current_state; 
-    send_sync_en  = 1'b0;
-    data_load_en  = 1'b0;
-    send_eop_en   = 1'b0;
-    
-    case (tx_current_state)
-        
-        TX_S_RESET: begin
-            if (!Reset) begin
-                tx_next_state = TX_S_WAIT;
-            end
-        end
-        
-        TX_S_WAIT: begin
-            // Self-loop: !TXValid
-            if (TXValid) begin
-                tx_next_state = TX_S_SEND_SYNC;
-            end
-        end
-        
-        TX_S_SEND_SYNC: begin
-            send_sync_en = 1'b1;
-            tx_next_state = TX_S_DATA_LOAD; // Unconditional transition
-        end
-        
-        TX_S_DATA_LOAD: begin
-            data_load_en = 1'b1;
-            
-            if (TX_Hold_Reg_Empty) begin // Frame complete
-                tx_next_state = TX_S_SEND_EOP;
-            end
-            else if (TX_Hold_Reg_Full) begin // Buffer full, must pause
-                tx_next_state = TX_S_DATA_WAIT;
-            end
-            else if (!TXValid) begin // Abort/pause due to data not ready
-                tx_next_state = TX_S_WAIT;
-            end
-            // Self-loop: stay in TX_S_DATA_LOAD if TXReady, not full, and not empty
-            // This self-loop is implicitly handled by the default tx_next_state = tx_current_state;
-        end
-        
-        TX_S_DATA_WAIT: begin
-            // Self-loop: TX Hold Reg Full
-            if (TX_Hold_Reg_Empty) begin // Buffer clear, resume loading
-                tx_next_state = TX_S_DATA_LOAD;
-            end
-        end
-        
-        TX_S_SEND_EOP: begin
-            send_eop_en = 1'b1;
-            
-            // Self-loop: EOP not done
-            if (EOP_not_done) begin
-                tx_next_state = TX_S_SEND_EOP;
-            end
-            else begin // EOP done
-                tx_next_state = TX_S_WAIT;
-            end
-        end
-        
-        default: begin
-            tx_next_state = TX_S_RESET;
-        end
-        
+    // Default outputs
+    piso_loading    = 0;
+    piso_data       = 8'h00;
+    tx_done         = 0;
+
+    next_state = state;
+
+    case (state)
+
+    TX_S_RESET:
+        next_state = TX_S_WAIT;
+
+    TX_S_WAIT:
+        if (tx_start)
+            next_state = TX_S_SEND_SYNC;
+
+    TX_S_SEND_SYNC: begin
+        piso_data    = SYNC_BYTE;
+        piso_loading = 1;
+
+        if (!piso_busy && piso_done)
+            next_state = TX_S_DATA_LOAD;
+    end
+
+    TX_S_DATA_LOAD: begin
+        piso_data    = tx_data_in;
+        piso_loading = 1;
+        next_state = TX_S_DATA_WAIT;
+    end
+
+    TX_S_DATA_WAIT: begin
+
+        if (piso_done)
+            next_state = TX_S_SEND_EOP;
+    end
+
+    TX_S_SEND_EOP: begin
+        tx_done = 1;
+        next_state = TX_S_WAIT;
+    end
+
+    default:
+        next_state = TX_S_RESET;
+
     endcase
 end
 
