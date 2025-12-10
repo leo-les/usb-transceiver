@@ -2,21 +2,14 @@
 module usb_bit_stuffer (
     input  logic clk,
     input  logic nRST,
-
-    // Input bitstream
     input  logic in_bit,
     input  logic en,
-
-    // Output bitstream (stuffed)
     output logic out_bit,
     output logic out_valid  
 );
-
     typedef enum logic[1:0] {NORMAL, STUFFING, RESET} state_t;
     state_t state, next_state;
-
     logic [2:0] one_count, next_one_count;
-    // Clocked logic
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             state <= RESET;
@@ -24,10 +17,8 @@ module usb_bit_stuffer (
         end else begin
             one_count <= next_one_count;
             state <= next_state;
-
         end
     end
-    //Next state logic
     always_comb begin
         next_state = state;
         case(state)
@@ -45,13 +36,11 @@ module usb_bit_stuffer (
             end
         endcase
     end
-    // State-based output logic
     always_comb begin
         out_bit = 0;
         out_valid = 0;
         next_one_count = one_count;
         case (state)
-
         NORMAL: begin
             if (en) begin
                 out_valid = 1;
@@ -62,25 +51,16 @@ module usb_bit_stuffer (
                     next_one_count = 0;
             end
         end
-
         STUFFING: begin
-            out_valid = 1;
+            out_valid = 0;
             out_bit   = 0;
             next_one_count = 0;
         end
-        
         RESET: begin
             out_valid = 0;
+            out_bit = 0;
             next_one_count = 0;
         end
-
         endcase
     end
-    
-
 endmodule
-
-
-
-
-
