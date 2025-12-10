@@ -20,6 +20,7 @@ end
     always_ff @(posedge clk or negedge nRST) begin
     if (!nRST) begin
         prev_encoded_bit <= 1;
+        decoded_bit <= 1;
     end else begin
         prev_encoded_bit <= curr_bit;
         decoded_bit <= next_decoded_bit;
