@@ -1,14 +1,14 @@
+`default_nettype none
 module bit_unstuffer (
     input  logic clk,
     input  logic nRST,
     input  logic in_bit,    // input stuffed bitstream
     input  logic in_valid,
     output logic out_bit,   // output unstuffed stream
-    output logic out_valid,
-    output logic[2:0] one_count
+    output logic out_valid
 );
+    logic [2:0] one_count; 
     logic drop_next;
-
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             one_count <= 3'd0;
@@ -34,5 +34,4 @@ module bit_unstuffer (
             end
         end
     end
-
 endmodule
