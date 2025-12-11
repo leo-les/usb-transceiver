@@ -1,5 +1,5 @@
 # usb-transceiver
-![ASIC Functional Blocks](docs/images/asic_functional_blocks.png)
+![ASIC Functional Blocks](docs/images/ASIC.png)
 
 ![UTMI RTL Diagram](docs/images/RTL.png)
 
