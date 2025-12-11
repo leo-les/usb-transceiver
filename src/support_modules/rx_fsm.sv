@@ -43,25 +43,21 @@ typedef enum logic [3:0] {
         error_flag     = 1'b0;
         case (current_state)
             S_RESET: begin
-                if (!nRST && !RXActive && !RXValid) next_state = S_RX_WAIT;
+                next_state = S_RX_WAIT;
             end
             S_RX_WAIT: begin
                 if (SYNC_Detected) next_state = S_STRIP_SYNC;
-                else if (!SYNC) next_state = S_TERMINATE;
             end
             S_STRIP_SYNC: begin
-                strip_sync_en = 1'b1;
                 if (Data) next_state = S_RX_DATA;
             end
             S_RX_DATA: begin
                 data_out_valid = 1'b1;
                 if (EOP_Detected) next_state = S_STRIP_EOP;
-                else if (!Data && !RXValid) next_state = S_RX_DATA_WAIT;
+                else if (!Data && !RXValid) next_state = S_RX_DATA;
                 else if (RXError) next_state = S_ERROR;
-            end
-            S_RX_DATA_WAIT: begin
-                if (Data) next_state = S_RX_DATA;
-                else if (RXError) next_state = S_ERROR;
+                else if (Data && RXValid) 
+                    next_state = S_TERMINATE;
             end
             S_STRIP_EOP: begin
                 strip_eop_en = 1'b1;
