@@ -8,7 +8,8 @@ module tx_fsm (
     input  logic piso_done,
     output logic piso_loading,
     output logic [7:0] piso_data,
-    input  logic stuffer_done
+    input  logic stuffer_done,
+    output logic nrzi_enable
 );
     typedef enum logic [2:0] {
         TX_S_RESET,
