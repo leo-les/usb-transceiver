@@ -30,6 +30,7 @@ module tx_fsm (
         piso_loading    = 0;
         piso_data       = 8'h00;
         tx_done         = 0;
+        nrzi_enable     = 1;
         next_state = state;
         case (state)
         TX_S_RESET:
