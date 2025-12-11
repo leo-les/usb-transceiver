@@ -4,14 +4,14 @@ module usb_transceiver(
     input logic d_plus_in, // input to RX side
     input logic d_minus_in, // input to RX side
     output logic d_plus_out, // output of TX side
+    input logic[7:0] tx_data, // USB transmits this byte to host
+    input logic tx_valid, // if not valid, error occurs
     output logic d_minus_out, // output of TX side
     output logic tx_1_rx_0, // 1 means transmitting, 0 means receiving
     output logic[7:0] rx_data, // USB receives this byte from host
     output logic rx_valid,
     output logic rx_eop, // if USB is at end of packet
-    output logic rx_error,
-    input logic[7:0] tx_data, // USB transmits this byte to host
-    input logic tx_valid // if not valid, error occurs
+    output logic rx_error, transmitting
 );
     logic pulse;
     logic aligned_bit;
@@ -25,15 +25,6 @@ module usb_transceiver(
     logic decoder_done; // decoder -> unstuffer
     logic unstuffer_done; // unstuffer -> sipo
     logic sipo_done; // sipo -> usb output
-    always_ff @(posedge clk, negedge nRST) begin
-        if (!nRST) begin 
-            rx_active <= 0;
-        end
-        else if (rx_eop) begin 
-            rx_active <= 0;
-        end
-        else if (d_plus_in == 0 && d_minus_in == 1) rx_active <= 1; 
-    end
     assign is_sync_byte = (sipo_raw_byte == 8'h80) && sipo_done;
     assign rx_data  = sipo_raw_byte;
     assign rx_valid = sipo_done && fsm_data_valid; 
@@ -62,7 +53,7 @@ module usb_transceiver(
         .rx_eop(rx_eop)
     );
     nrzi_decoder u_nrzi_decoder(
-        .clk(clk), .nRST(nRST), .en(rx_active), .curr_bit(aligned_bit), .pulse(pulse),
+        .clk(clk), .nRST(nRST), .en(1'b1), .curr_bit(d_plus_in), .pulse(pulse),
         .decoded_bit(nrzi_decoded_bit)
     );
     bit_unstuffer u_bit_unstuffer(
@@ -78,11 +69,11 @@ module usb_transceiver(
     logic stuffed_bit;
     logic nrzi_encoded_bit;
     logic tx_done;
+    logic piso_done;
     logic [7:0] piso_data;
     logic piso_en;
     logic piso_loading;
     logic piso_busy;
-    logic piso_done;
     logic stuffer_done;
     logic nrzi_enable;
     tx_fsm u_tx_fsm(
@@ -94,20 +85,23 @@ module usb_transceiver(
         .stuffer_done(stuffer_done),
         .tx_done(tx_done),
         .piso_loading(piso_loading), // load byte into piso
-        .piso_data(piso_data)
+        .piso_data(piso_data),
+        .nrzi_enable(nrzi_enable),
+        .transmitting(transmitting)
     );
     piso_shift_register u_piso(
         .clk(clk), .nRST(nRST), .shift_enable(stuffer_valid), .data_in(piso_data), .load(piso_loading),
         .serial_out(raw_tx_bit), .busy(piso_busy), .done(piso_done)
     );
     bit_stuffer u_bit_stuffer(
-        .clk(clk), .nRST(nRST), .in_bit(raw_tx_bit), .stuff_en(piso_done),
+        .clk(clk), .nRST(nRST), .in_bit(raw_tx_bit), .stuff_en(1'b1),
         .out_bit(stuffed_bit), .out_valid(stuffer_valid)
     );
     nrzi_encoder u_nrzi_encoder(
         .clk(clk), .nRST(nRST), .enable(nrzi_enable), .curr_bit(stuffed_bit),
         .encoded_bit(nrzi_encoded_bit)
     );
+    /*
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             tx_1_rx_0 <= 1'b0; // default: RX
@@ -117,6 +111,7 @@ module usb_transceiver(
             else if (tx_done || rx_active) tx_1_rx_0 <= 1'b0;
         end
     end
-    assign d_plus_out  = tx_1_rx_0 ? nrzi_encoded_bit : 1'b0;
-    assign d_minus_out = tx_1_rx_0 ? ~nrzi_encoded_bit : 1'b0;
+    */
+    assign d_plus_out  = nrzi_encoded_bit;
+    assign d_minus_out = ~nrzi_encoded_bit;
 endmodule
