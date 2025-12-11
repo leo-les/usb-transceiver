@@ -7,24 +7,23 @@ module nrzi_decoder(
     output logic decoded_bit
 );
     logic prev_encoded_bit;
-    logic next_decoded_bit;
-    always_comb begin
-        if (en == 0) begin
-            next_decoded_bit = 1; // Idle state
-        end else begin
-            if(curr_bit == prev_encoded_bit) 
-                next_decoded_bit = 1;
-            else
-                next_decoded_bit = 0;
-        end
-    end
+
         always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             prev_encoded_bit <= 1;
             decoded_bit <= 1;
-        end else begin
+        end else if(en) begin
+            if (curr_bit == prev_encoded_bit)
+                decoded_bit <= 1;
+            else
+                decoded_bit <= 0;
+                
             prev_encoded_bit <= curr_bit;
-            decoded_bit <= next_decoded_bit;
         end
+        else if(!en) begin
+            decoded_bit <= 1;
+            prev_encoded_bit <= 1;
+        end
+        
     end
 endmodule
