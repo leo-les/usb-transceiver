@@ -1,15 +1,15 @@
+`default_nettype none
 module bit_stuffer (
     input  logic clk,
     input  logic nRST,
     input  logic in_bit,
-    input  logic en,
+    input  logic stuff_en,
     output logic out_bit,
     output logic out_valid  
 );
     typedef enum logic[1:0] {NORMAL, STUFFING, RESET} state_t;
     state_t state, next_state;
     logic [2:0] one_count, next_one_count;
-    
     always_ff @(posedge clk or negedge nRST) begin
         if (!nRST) begin
             state <= RESET;
@@ -19,7 +19,6 @@ module bit_stuffer (
             state <= next_state;
         end
     end
-
     always_comb begin
         next_state = state;
         case(state)
@@ -37,14 +36,13 @@ module bit_stuffer (
             end
         endcase
     end
-
     always_comb begin
         out_bit = 0;
         out_valid = 0;
         next_one_count = one_count;
         case (state)
         NORMAL: begin
-            if (en) begin
+            if (stuff_en) begin
                 out_valid = 1;
                 out_bit = in_bit;
                 if(in_bit == 1)
@@ -65,5 +63,4 @@ module bit_stuffer (
         end
         endcase
     end
-
 endmodule

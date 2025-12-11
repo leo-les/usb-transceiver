@@ -83,8 +83,7 @@ VL_ATTR_COLD void Vtb_sipo_shift_register___024root___ctor_var_reset(Vtb_sipo_sh
     vlSelf->tb_sipo_shift_register__DOT__unnamedblk1__DOT__i = 0;
     vlSelf->tb_sipo_shift_register__DOT__DUT__DOT__data = VL_RAND_RESET_I(8);
     vlSelf->tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt = VL_RAND_RESET_I(3);
-    vlSelf->tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__tmp = VL_RAND_RESET_I(8);
-    vlSelf->tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__unnamedblk2__DOT__i = 0;
+    vlSelf->tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__i = 0;
     vlSelf->__Vtrigprevexpr___TOP__tb_sipo_shift_register__DOT__CLK__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__tb_sipo_shift_register__DOT__nRST__0 = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {

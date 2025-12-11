@@ -160,9 +160,7 @@ VL_INLINE_OPT void Vtb_sipo_shift_register___024root___nba_sequent__TOP__0(Vtb_s
     if (vlSelfRef.tb_sipo_shift_register__DOT__nRST) {
         vlSelfRef.tb_sipo_shift_register__DOT__done = 0U;
         if (vlSelfRef.tb_sipo_shift_register__DOT__shift_enable) {
-            vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__unnamedblk2__DOT__i = 0U;
-            vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__tmp 
-                = vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data;
+            vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__i = 0U;
             vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data 
                 = ((0xfeU & ((IData)(vlSelfRef.tb_sipo_shift_register__DOT__DUT__DOT__data) 
                              << 1U)) | (IData)(vlSelfRef.tb_sipo_shift_register__DOT__serial_in));

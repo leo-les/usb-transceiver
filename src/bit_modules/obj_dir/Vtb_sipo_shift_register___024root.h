@@ -22,12 +22,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_sipo_shift_register___024root final : pub
     CData/*0:0*/ tb_sipo_shift_register__DOT__done;
     CData/*7:0*/ tb_sipo_shift_register__DOT__DUT__DOT__data;
     CData/*2:0*/ tb_sipo_shift_register__DOT__DUT__DOT__bit_cnt;
-    CData/*7:0*/ tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__tmp;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_sipo_shift_register__DOT__CLK__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__tb_sipo_shift_register__DOT__nRST__0;
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ tb_sipo_shift_register__DOT__unnamedblk1__DOT__i;
-    IData/*31:0*/ tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__unnamedblk2__DOT__i;
+    IData/*31:0*/ tb_sipo_shift_register__DOT__DUT__DOT__unnamedblk1__DOT__i;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     VlDelayScheduler __VdlySched;

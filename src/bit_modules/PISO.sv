@@ -1,3 +1,4 @@
+`default_nettype none
 module piso_shift_register(
     input logic clk, nRST,
     input logic shift_enable,
@@ -7,13 +8,11 @@ module piso_shift_register(
     output logic busy,
     output logic done
 );
-
     logic[7:0] data;
     logic[2:0] bit_cnt;
     logic tmp;
     always_ff @(posedge clk, negedge nRST) begin
         if(!nRST) begin
-            // set all to 0 if reset
             data <= '0;
             bit_cnt <= '0;
             busy <= 1'b0;
@@ -22,7 +21,6 @@ module piso_shift_register(
         end 
         else begin
             done <= 1'b0;
-
             if(load && !busy) begin
                 data <= data_in;
                 bit_cnt <= '0;
@@ -44,6 +42,5 @@ module piso_shift_register(
             end
         end
     end
-
     assign serial_out = tmp;
     endmodule
