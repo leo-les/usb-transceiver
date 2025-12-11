@@ -104,7 +104,7 @@ module usb_transceiver(
         .out_bit(stuffed_bit), .out_valid(stuffer_valid)
     );
     nrzi_encoder u_nrzi_encoder(
-        .clk(clk), .nRST(nRST), .enable(1'b1), .curr_bit(stuffed_bit),
+        .clk(clk), .nRST(nRST), .enable(nrzi_enable), .curr_bit(stuffed_bit),
         .encoded_bit(nrzi_encoded_bit)
     );
     always_ff @(posedge clk or negedge nRST) begin
