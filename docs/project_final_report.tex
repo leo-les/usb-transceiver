@@ -1,22 +1,48 @@
 \documentclass{article}
 
 \usepackage{multirow}
+\usepackage{graphicx}
 
-\title{Design and Simulation of a USB 2.0 Transceiver in System Verilog}
+
+
+\title{Design and Simulation of a USB 2.0 Transceiver in SystemVerilog}
 \author{Andrew Lu, Jiayi Liu, Leo Lesmes, Nhan Do}
+
+\graphicspath{{images/}}
+
+
 \begin{document}
 \maketitle
 
 \begin{abstract}
-USB 2.0 Transceiver Macrocell Interface (UTMI)
+With SystemVerilog code, model a USB 2.0 Transceiver Macrocell Interface (UTMI) that acts as  takes in data packets from a Serial Interface Engine (SIE) and outputs.With SystemVerilog code, model a USB 2.0 Transceiver Macrocell Interface (UTMI) that acts as  takes in data packets from a Serial Interface Engine (SIE) and outputs
+.With SystemVerilog code, model a USB 2.0 Transceiver Macrocell Interface (UTMI) that acts as  takes in data packets from a Serial Interface Engine (SIE) and outputs
+With SystemVerilog code, model a USB 2.0 Transceiver Macrocell Interface (UTMI) that acts as  takes in data packets from a Serial Interface Engine (SIE) and outputs
+With SystemVerilog code, model a USB 2.0 Transceiver Macrocell Interface (UTMI) that acts as  takes in data packets from a Serial Interface Engine (SIE) and outputs
+
 \end{abstract}
 
 \section{Technical}
 \subsection{Overview}
+We are designing the part in green, the 
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{asic_functional_blocks}
+    \caption{ASIC Functional Blocks}
+    \label{fig:hl}
+\end{figure}
+Low speed 
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{RTL}
+    \caption{UTMI RTL Diagram}
+    \label{fig:rtl}
+\end{figure}
 \subsubsection*{Hardware \& Software}
 Numerous pieces of software were used to help develop this project, along with mutliple coding languages. The names of the products used, along with their purpose in the project, are listed below.
-\begin{table}[!h]
-    \centering
+\begin{table}[htp]
+    %\centering
     \begin{tabular}{ |l|l|l| } 
         \hline
         \multicolumn{1}{|c|}{\textbf{Type}} & \multicolumn{1}{c|}{\textbf{Name}} & \multicolumn{1}{c|}{\textbf{Purpose}} \\
@@ -27,9 +53,9 @@ Numerous pieces of software were used to help develop this project, along with m
         & Google Slides & Slideshow software that the Final Presentation was created in. \\ 
         & Visual Studio Code & IDE used for coding the project and writing the final report. \\
         & Github & Project was hosted and shared \\ 
-        & MyFPGA & In web-browser simulation tool for testing System Verilog code \\ 
+        & MyFPGA & In web-browser simulation tool for testing SystemVerilog code \\ 
         \hline
-        \multirow{2}{6em}{Programming Language} & System Verilog & Language that the UTMI was written in \\ 
+        \multirow{2}{6em}{Code Language} & SystemVerilog & Language that the UTMI was written in \\ 
         & LaTeX & Final project report (this document) was written in LaTeX \\ 
         \hline
 \end{tabular}
@@ -39,15 +65,18 @@ Numerous pieces of software were used to help develop this project, along with m
 \end{table}
 
 \subsubsection*{Division of Labor}
-\paragraph{Andrew:}
-\paragraph{Jiayi:}
-\paragraph{Leo:}
-\paragraph{Nhan:}
+\paragraph{Everyone:} Researched the various aspects of USB 2.0, drew diagrams, debugged and final testing, wrote final presentation, designed final presentation. Presented final presentation to class.
+\paragraph{Andrew:} Coded the
+\paragraph{Jiayi:} Coded th
+\paragraph{Leo:} Coded the . Main person for Final Report and Presentaion.
+\paragraph{Nhan:} Coded the . Worked to integrate 
 
 \subsubsection*{Timeline}
 Large picture of the timeline to be placed here
 
 \subsection{Design}
+
+
 \subsection{Simulation}
 \subsubsection*{Testing \& Benchmarks}
 \subsubsection*{Operation Documentation}
@@ -56,7 +85,7 @@ Large picture of the timeline to be placed here
 
 \section{Reflection}
 \subsection*{Learning Outcomes}
-Helped with system verilog knowledge
+Helped with SystemVerilog knowledge
 Helped with reading technical documentation
 \subsection*{Preferences}
 \paragraph{Andrew:}
