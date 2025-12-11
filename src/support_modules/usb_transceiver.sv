@@ -84,6 +84,7 @@ module usb_transceiver(
     logic piso_busy;
     logic piso_done;
     logic stuffer_done;
+    logic nrzi_enable;
     tx_fsm u_tx_fsm(
         .clk(clk), .nRST(nRST), 
         .tx_start(tx_valid),
