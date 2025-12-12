@@ -2,4 +2,5 @@ docs/*
 !docs/*.tex
 !docs/*.pdf
 !docs/*.pptx
+!docs/*.bib
 !docs/images/
