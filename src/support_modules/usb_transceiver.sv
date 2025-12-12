@@ -101,17 +101,7 @@ module usb_transceiver(
         .clk(clk), .nRST(nRST), .enable(nrzi_enable), .curr_bit(stuffed_bit),
         .encoded_bit(nrzi_encoded_bit)
     );
-    /*
-    always_ff @(posedge clk or negedge nRST) begin
-        if (!nRST) begin
-            tx_1_rx_0 <= 1'b0; // default: RX
-        end
-        else begin
-            if (tx_valid) tx_1_rx_0 <= 1'b1;
-            else if (tx_done || rx_active) tx_1_rx_0 <= 1'b0;
-        end
-    end
-    */
+
     assign d_plus_out  = nrzi_encoded_bit;
     assign d_minus_out = ~nrzi_encoded_bit;
 endmodule
