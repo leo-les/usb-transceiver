@@ -5,8 +5,19 @@
 \usepackage{tikz}
 \usepackage{placeins}
 \usepackage{url}
-
+\usepackage{float}
+\usepackage{xcolor}
 \usepackage[sorting=none,maxbibnames=4]{biblatex}
+
+\definecolor{l_red}{HTML}{F8CECC}
+\definecolor{l_orange}{HTML}{FFE6CC}
+\definecolor{l_yellow}{HTML}{FFF2CC}
+\definecolor{l_green}{HTML}{D5E8D4}
+\definecolor{d_red}{HTML}{B85450}
+\definecolor{d_orange}{HTML}{D79B00}
+\definecolor{d_yellow}{HTML}{D6B656}
+\definecolor{d_green}{HTML}{82B366}
+
 \addbibresource{references.bib}
 
 \title{Design and Simulation of a USB 2.0 Transceiver in SystemVerilog}
@@ -27,7 +38,7 @@ The USB Transceiver covers the physical (PHY) layer of USB communication, bridgi
     \centering
     \includegraphics[width=8cm]{asic_functional_blocks}
     \caption{ASIC Functional Blocks\autocite{intel2001utmi}}
-    \label{fig:hl}
+    \label{fig:asic}
 \end{figure}
 
 Our project aimed to simulate the behavior of a USB 2.0 Low Speed Transceiver in SystemVerilog, which sends and receives data at 1.5 Mbps utilizing a 48 Mhz clock signal. To the left of the USB 2.0 Transceiver block is a Serial Interface Engine (SIE), which treats incoming data as packets and sends serial data to the transceiver. To the right of the block are D+/D- wires, connecting the transceiver to a device controller.
@@ -75,40 +86,44 @@ Numerous pieces of software were used to help develop this project, along with m
 
 \subsubsection*{Division of Labor}
 \textcolor{white}{} % Prevents section header from jumping to next page
+Numerous pieces of software were used to help develop this project, along with multiple coding languages. The names of the products used, along with their purpose in the project, are listed below.
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=11cm]{DOL}
+    \includegraphics[width=12cm]{DOL}
     \caption{Division of Labor}
-    \label{fig:rtl}
+    \label{fig:dol}
 \end{figure}
 
+\newpage
+
 \subsubsection*{Timeline}
-\begin{figure}[!h]
+We kept our project to a pretty strict timeline
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\draw (0,0) -- (0,9);
+\draw (0,0) -- (0,9/1.5);
 
-\foreach \y in {1,2,3,4,5,6,7,8,9,}
-\draw (3pt,\y cm) -- (-3pt,\y cm);
+\foreach \y in {1,2,3,4,5,6,7,8,9}
+\draw (3pt,\y cm/1.5) -- (-3pt,\y cm/1.5);
 
-\draw (0,0) node[left=3pt] {End};
+\draw (0,0) node[left=3/2pt] {End};
 
-\draw (0,1) node[left=3pt] {Week 8};
-\draw (0,2) node[left=3pt] {Week 7};
-\draw (0,3) node[left=3pt] {Week 6};
-\draw (0,4) node[left=3pt] {Week 5};
-\draw (0,5) node[left=3pt] {Week 4};
-\draw (0,6) node[left=3pt] {Week 3};
-\draw (0,7) node[left=3pt] {Week 2};
-\draw (0,8) node[left=3pt] {Week 1};
-\draw (0,9) node[left=3pt] {Week 0};
+\draw (0,1/1.5) node[left=3pt] {\small Week 8};
+\draw (0,2/1.5) node[left=3pt] {\small Week 7};
+\draw (0,3/1.5) node[left=3pt] {\small Week 6};
+\draw (0,4/1.5) node[left=3pt] {\small Week 5};
+\draw (0,5/1.5) node[left=3pt] {\small Week 4};
+\draw (0,6/1.5) node[left=3pt] {\small Week 3};
+\draw (0,7/1.5) node[left=3pt] {\small Week 2};
+\draw (0,8/1.5) node[left=3pt] {\small Week 1};
+\draw (0,9/1.5) node[left=3pt] {\small Week 0};
 
-\draw (0,8.5) node[minimum height=1cm,minimum width =6cm,right=6pt, fill=red!30] {Project Proposal Drafting};
-\draw (0,7) node[minimum height=2cm,minimum width =6cm,right=6pt, fill =orange!30] {Research};
-\draw (0,5) node[minimum height=2cm, minimum width =6cm,right=6pt, fill =yellow!30] {Diagramming and Planning};
-\draw (0,2.5) node[minimum height=3cm, minimum width =6cm,right=6pt, fill =green!30] {Coding and Testing};
-\draw (0,.5) node[minimum height=1cm, minimum width =6cm,right=6pt, fill =gray!30] {Presentation and Paper Creation};
+\draw (0,8.5/1.5) node[minimum height=.9cm/1.5,minimum width =5cm,right=6pt, fill=l_red, draw = d_red] {\small Project Proposal Drafting};
+\draw (0,7/1.5) node[minimum height=1.9cm/1.5,minimum width =5cm,right=6pt, fill =l_orange, draw =d_orange] {\small Research};
+\draw (0,5/1.5) node[minimum height=1.9cm/1.5, minimum width =5cm,right=6pt, fill =l_yellow, draw = d_yellow] {\small Diagramming and Planning};
+\draw (0,2.5/1.5) node[minimum height=2.9cm/1.5, minimum width =5cm,right=6pt, fill =l_green, draw = d_green] {\small Coding and Testing};
+\draw (0,.5/1.5) node[minimum height=.9cm/1.5, minimum width =5cm,right=6pt, fill =gray!30] {\small Presentation and Paper Creation};
 
 
 \end{tikzpicture}
@@ -135,9 +150,9 @@ On the receiving end, the stuffed bits must be removed to recover the original d
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=10cm]{docs/images/nrzi_stuffing.png}
+    \includegraphics[width=10cm]{nrzi_stuffing.png}
     \caption{Bit Stuffing and NRZI Encoding}
-    \label{fig:hl}
+    \label{fig:bs/nrzi}
 \end{figure}
 
 \paragraph{SIPO Register:} 
@@ -162,37 +177,37 @@ PISO (Parallel-in-serial-out): PISO shift register accepts parallel data and out
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=12cm]{docs/images/sim_tx_sync.png}
+    \includegraphics[width=12cm]{sim_tx_sync.png}
     \caption{Transmitting 8'b00000001 (SYNC) Byte Waveform}
-    \label{fig:hl}
+    \label{fig:t1}
 \end{figure}
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=12cm]{docs/images/sim_tx_00010101.png}
+    \includegraphics[width=12cm]{sim_tx_00010101.png}
     \caption{Transmitting 8'b00010101 Byte Waveform}
-    \label{fig:hl}
+    \label{fig:t2}
 \end{figure}
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=12cm]{docs/images/sim_tx_01111111.png}
+    \includegraphics[width=12cm]{sim_tx_01111111.png}
     \caption{Transmitting 8'01111111 Byte Waveform}
-    \label{fig:hl}
+    \label{fig:t3}
 \end{figure}
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=12cm]{docs/images/sim_rx_01010101.png}
+    \includegraphics[width=12cm]{sim_rx_01010101.png}
     \caption{Receiving 8'b01010101 Byte Waveform}
-    \label{fig:hl}
+    \label{fig:r1}
 \end{figure}
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=12cm]{docs/images/sim_rx_11111101.png}
+    \includegraphics[width=12cm]{sim_rx_11111101}
     \caption{Receiving 8'b11111101 Byte Waveform}
-    \label{fig:hl}
+    \label{fig:r}
 \end{figure}
 
 \newpage
