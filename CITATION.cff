@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - given-names: Andrew
+    family-names: Lu
+  - given-names: Jiayi
+    family-names: Liu
+  - given-names: Leo
+    family-names: Lesmes
+  - given-names: Nhan
+    family-names: Do
+title: "usb-transceiver"
+url: "https://github.com/leo-les/usb-transceiver"
